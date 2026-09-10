@@ -1,0 +1,21 @@
+# This configuration uses paid compute and a persistent disk.
+# Review Render's displayed price before approving deployment.
+services:
+  - type: web
+    name: bloom-finance-api
+    runtime: python
+    plan: 0.5c-512mb
+    branch: main
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 4 backend.app:application
+    healthCheckPath: /api/health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: BLOOM_DATABASE
+        value: /var/data/bloom.sqlite3
+      - key: BLOOM_ALLOWED_ORIGIN
+        value: https://eaj1.github.io
+    disk:
+      name: bloom-plans-data
+      mountPath: /var/data
+      sizeGB: 1

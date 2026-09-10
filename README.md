@@ -22,6 +22,16 @@ Open http://localhost:8001. The database is created at `data/bloom.sqlite3` on f
 
 ## Connect the live GitHub Pages site
 
+### Deploy on Render
+
+[Deploy this backend to Render](https://render.com/deploy?repo=https://github.com/EAJ1/Financial-loans)
+
+The repository includes `render.yaml` with the build/start commands, health check, GitHub Pages origin, and a 1 GB persistent disk for SQLite. This requires paid Render compute and disk storage: review the price shown by Render before confirming. Sign in to Render, open the deployment link, connect the repository if asked, and approve the Blueprint. No API keys need to be pasted into this repository.
+
+Once the service is live, copy its actual HTTPS `onrender.com` URL from the Render dashboard. Verify that `/api/health` returns `{"service":"bloom-plans","available":true}`. Set `window.BLOOM_API_URL` in `config.js` to that service URL and push the change to `main` to connect the GitHub Pages frontend. The service name alone does not guarantee the URL; use the URL Render assigns.
+
+Automatic backend deployments are disabled for the deployment button. Deploy subsequent backend changes manually from Render, or enable automatic deployments for your own service in its settings. Keep the disk attached so redeployments retain saved plans.
+
 GitHub Pages cannot execute the Python backend. Deploy it to a Python host with a persistent disk and HTTPS, then set the public backend URL in `config.js` (without `/api`). Never add secrets to that file.
 
 ```sh
