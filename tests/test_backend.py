@@ -37,6 +37,23 @@ class SavedPlanTests(unittest.TestCase):
         self.assertEqual((loaded['amount'], loaded['months'], loaded['purpose']), (5000, 6, 'home'))
         self.assertEqual(len(saved['reference']), 32)
 
+    def test_r500_plan_and_existing_database_migration(self):
+        _, existing = self.create()
+        with app.connect() as db:
+            schema = db.execute("SELECT sql FROM sqlite_master WHERE name='plans'").fetchone()[0]
+            db.execute('ALTER TABLE plans RENAME TO temporary_plans')
+            db.execute(schema.replace('BETWEEN 500 AND 25000', 'BETWEEN 1000 AND 25000'))
+            db.execute('INSERT INTO plans SELECT * FROM temporary_plans')
+            db.execute('DROP TABLE temporary_plans')
+        result, saved = self.request('/api/plans', 'POST',
+                                     {'amount': 500, 'months': 6, 'purpose': 'everyday'})
+        self.assertEqual(result['status'], 201)
+        result, loaded = self.request('/api/plans/' + saved['reference'])
+        self.assertEqual(loaded['amount'], 500)
+        result, loaded = self.request('/api/plans/' + existing['reference'])
+        self.assertEqual(result['status'], 200)
+        self.assertEqual(loaded['amount'], 5000)
+
     def test_invalid_values_are_rejected(self):
         for payload in [[], {'amount': True, 'months': 6, 'purpose': 'home'},
             {'amount': 999, 'months': 6, 'purpose': 'home'},

@@ -23,9 +23,16 @@ def connect():
     db = sqlite3.connect(DATABASE, timeout=10)
     db.row_factory = sqlite3.Row
     db.execute('''CREATE TABLE IF NOT EXISTS plans (
-        reference TEXT PRIMARY KEY, amount INTEGER NOT NULL CHECK(amount BETWEEN 1000 AND 25000),
+        reference TEXT PRIMARY KEY, amount INTEGER NOT NULL CHECK(amount BETWEEN 500 AND 25000),
         months INTEGER NOT NULL CHECK(months BETWEEN 3 AND 24), purpose TEXT NOT NULL,
         annual_rate REAL NOT NULL, created_at TEXT NOT NULL, expires_at TEXT NOT NULL)''')
+    schema = db.execute("SELECT sql FROM sqlite_master WHERE type='table' AND name='plans'").fetchone()[0]
+    if 'BETWEEN 1000 AND 25000' in schema:
+        with db:
+            db.execute('ALTER TABLE plans RENAME TO plans_previous')
+            db.execute(schema.replace('BETWEEN 1000 AND 25000', 'BETWEEN 500 AND 25000'))
+            db.execute('INSERT INTO plans SELECT * FROM plans_previous')
+            db.execute('DROP TABLE plans_previous')
     db.execute('CREATE INDEX IF NOT EXISTS plans_expiry ON plans(expires_at)')
     try:
         with db:
@@ -42,8 +49,8 @@ def validate(payload):
     if not isinstance(payload, dict) or set(payload) != {'amount', 'months', 'purpose'}:
         raise ValueError('Provide only amount, months and purpose.')
     amount, months, purpose = payload['amount'], payload['months'], payload['purpose']
-    if type(amount) is not int or not 1000 <= amount <= 25000 or amount % 500:
-        raise ValueError('Choose an amount from R 1,000 to R 25,000 in steps of R 500.')
+    if type(amount) is not int or not 500 <= amount <= 25000 or amount % 500:
+        raise ValueError('Choose an amount from R 500 to R 25,000 in steps of R 500.')
     if type(months) is not int or months not in range(3, 25, 3):
         raise ValueError('Choose a term from 3 to 24 months in steps of 3.')
     if not isinstance(purpose, str) or purpose not in PURPOSES:
