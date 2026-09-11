@@ -114,3 +114,6 @@ dialog{max-height:calc(100dvh - 32px);overflow-y:auto}
   .closing{padding:24px;gap:16px}
   footer{padding-top:36px}
 }
+
+/* Vector decoration avoids platform emoji rendering over the heading. */
+.about-flower{width:160px;height:160px;pointer-events:none}
