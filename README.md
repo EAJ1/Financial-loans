@@ -1,6 +1,8 @@
-# Bloom Finance
+# Hlongwe Finance
 
-A responsive loans website concept with a repayment calculator, monthly budget check and SQLite-backed saved plans. No loans are issued or applications submitted.
+A responsive website concept for Hlongwe Finance, featuring personal loans from R500 and Purchase Order (PO) Funding from R20,000 to R250,000. Includes a personal loan repayment calculator, monthly budget check and SQLite-backed saved plans. No loans are issued or applications submitted.
+
+[View the website](https://eaj1.github.io/Financial-loans/) · [Explore loans and PO Funding](https://eaj1.github.io/Financial-loans/#loans)
 
 ## Run locally
 
@@ -14,7 +16,8 @@ Open http://localhost:8001. The database is created at `data/bloom.sqlite3` on f
 
 ## Features
 
-- Illustrative monthly repayments using 24% annual interest, excluding fees.
+- Personal loan calculator for amounts from R500 to R25,000 over 3–24 months, with illustrative monthly repayments using 24% annual interest, excluding fees.
+- PO Funding information for amounts from R20,000 to R250,000. The personal loan calculator does not calculate PO Funding repayments.
 - Budget check using income and expenses. These figures stay in the browser and are never saved or sent.
 - Save amount, term and purpose for 30 days. Reopen a plan with its random 32-character reference.
 - No contact, identity or banking data is collected. Anyone with a reference can view that plan; references are not customer authentication.
@@ -46,7 +49,7 @@ The local server binds only to loopback. Public files are served from an explici
 ## API
 
 - `GET /api/health`: service/database availability.
-- `POST /api/plans`: JSON with only `amount` (1000–25000 in steps of 500), `months` (3–24 in steps of 3), and `purpose` (`everyday`, `home`, `milestone`, `other`). Returns reference and expiry.
+- `POST /api/plans`: JSON with only `amount` (500–25000 in steps of 500), `months` (3–24 in steps of 3), and `purpose` (`everyday`, `home`, `milestone`, `other`). Returns reference and expiry.
 - `GET /api/plans/{reference}`: non-expired plan. No public listing exists.
 
 ## Checks
@@ -57,4 +60,4 @@ node --check script.js
 node --check plans.js
 ```
 
-Bloom Finance is a placeholder brand. Content and rates are examples, not lender quotes.
+Hlongwe Finance is presented as a website concept. Content and rates are examples, not lender quotes.
