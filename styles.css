@@ -21,3 +21,49 @@ summary{font-size:16px;min-height:28px}
 input[type=range]{height:24px;margin-top:11px;margin-bottom:2px}
 @media(max-width:700px){.calculator-heading{flex-wrap:wrap}.hero-note{flex-wrap:wrap;font-size:12px}.benefit-inner{font-size:12px}.announcement{font-size:12px}.footer-top{align-items:start}.footer-top>a:last-child{max-width:140px}.hero-art{isolation:isolate}.range-label{font-size:14px}.wrap{padding-left:22px;padding-right:22px}.closing{margin-left:22px;margin-right:22px}.calculator{padding:20px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+/* Responsive spacing for phones, tablets and compact laptops. */
+.header nav a{display:inline-flex;align-items:center;min-height:44px}
+.calculator-heading{flex-wrap:wrap}
+.calculator-heading h3{flex:1 1 200px}
+.pill{white-space:nowrap}
+.hero>*,.calculator-section>*,.planning-grid>*,.restore-panel>*,.loan-grid>*{min-width:0}
+.restore-controls input{flex:1 1 220px}
+.restore-controls{flex-wrap:wrap}
+.restore-controls .button{flex-shrink:0}
+summary{min-height:44px;align-items:center}
+.dialog-close{min-width:44px;min-height:44px}
+dialog{max-height:calc(100dvh - 32px);overflow-y:auto}
+@media(min-width:701px) and (max-width:1100px){
+  .header{gap:20px}
+  .header-cta{display:none}
+  .calculator-section{gap:32px;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+  .benefit-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .closing{margin-left:28px;margin-right:28px}
+}
+@media(min-width:701px) and (max-width:900px){
+  .calculator-section,.restore-panel{grid-template-columns:minmax(0,1fr)}
+  .calculator-section{align-items:start}
+  .section-intro h2 br{display:none}
+  .quiet-note{display:none}
+  .loan-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .loan-card:last-child{grid-column:1 / -1}
+  .about-panel{padding:32px;gap:28px}
+  .about-panel h2{font-size:32px}
+  .faq-section{grid-template-columns:minmax(0,1fr);gap:24px}
+}
+@media(max-width:700px){
+  .restore-controls input{flex-basis:auto}
+  .hero-art{height:clamp(340px,100vw,430px)}
+  h1{font-size:clamp(48px,15vw,62px)}
+  .planning-section{padding-bottom:60px}
+}
+@media(max-width:360px){
+  .wrap{padding-left:16px;padding-right:16px}
+  .closing{margin-left:16px;margin-right:16px}
+  .calculator,.planning-card,.restore-panel{padding:16px}
+  .range-label,.total-line{flex-wrap:wrap}
+  .repayment{padding:16px}
+  .repayment strong{font-size:32px}
+  .about-panel{padding:24px}
+  .button{gap:16px;padding-left:18px;padding-right:18px}
+}
