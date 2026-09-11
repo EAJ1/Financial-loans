@@ -16,7 +16,7 @@ Open http://localhost:8001. The database is created at `data/bloom.sqlite3` on f
 
 ## Features
 
-- Personal loan calculator for amounts from R500 to R25,000 over 3–24 months, with illustrative monthly repayments using 24% annual interest, excluding fees.
+- Personal loan calculator for amounts from R500 to R25,000 over 3–24 months, with illustrative monthly repayments using 40% annual interest, excluding fees.
 - PO Funding information for amounts from R20,000 to R250,000. The personal loan calculator does not calculate PO Funding repayments.
 - Budget check using income and expenses. These figures stay in the browser and are never saved or sent.
 - Save amount, term and purpose for 30 days. Reopen a plan with its random 32-character reference.

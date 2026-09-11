@@ -36,6 +36,7 @@ class SavedPlanTests(unittest.TestCase):
         self.assertEqual(result['status'], 200)
         self.assertEqual((loaded['amount'], loaded['months'], loaded['purpose']), (5000, 6, 'home'))
         self.assertEqual(len(saved['reference']), 32)
+        self.assertEqual(loaded['annual_rate'], 0.40)
 
     def test_r500_plan_and_existing_database_migration(self):
         _, existing = self.create()

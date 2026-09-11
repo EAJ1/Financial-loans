@@ -5,7 +5,7 @@ const wholeMoney = value => `R ${new Intl.NumberFormat('en-ZA').format(value)}`;
 function calculate() {
   const principal = Number(amount.value);
   const months = Number(term.value);
-  const monthlyRate = 0.24 / 12;
+  const monthlyRate = 0.40 / 12;
   const payment = principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));
   document.querySelector('#amount-value').textContent = wholeMoney(principal);
   document.querySelector('#term-value').textContent = `${months} months`;
@@ -13,7 +13,7 @@ function calculate() {
   document.querySelector('#total').textContent = money(payment * months);
   amount.setAttribute('aria-valuetext', wholeMoney(principal));
   term.setAttribute('aria-valuetext', `${months} months`);
-  document.querySelector('#selection-summary').textContent = `For ${wholeMoney(principal)} over ${months} months, the example repayment is ${money(payment)} per month, with a total of ${money(payment * months)}. This uses 24% annual interest and excludes fees.`;
+  document.querySelector('#selection-summary').textContent = `For ${wholeMoney(principal)} over ${months} months, the example repayment is ${money(payment)} per month, with a total of ${money(payment * months)}. This uses 40% annual interest and excludes fees.`;
 }
 amount.addEventListener('input', calculate);
 term.addEventListener('input', calculate);

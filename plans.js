@@ -69,7 +69,8 @@ document.querySelector('#budget-form').addEventListener('submit', event => {
   event.preventDefault();
   const income = Number(document.querySelector('#income').value);
   const expenses = Number(document.querySelector('#expenses').value);
-  const payment = Number(amount.value) * 0.02 / (1 - Math.pow(1.02, -Number(term.value)));
+  const monthlyRate = 0.40 / 12;
+  const payment = Number(amount.value) * monthlyRate / (1 - Math.pow(1 + monthlyRate, -Number(term.value)));
   const remaining = income - expenses - payment;
   document.querySelector('#budget-result').textContent = remaining >= 0
     ? `With this example repayment, you would have ${money(remaining)} left each month after the expenses you entered. Allow room for irregular costs and savings too.`

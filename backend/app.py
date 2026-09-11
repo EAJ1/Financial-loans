@@ -109,7 +109,7 @@ def application(environ, start_response):
                 if db.execute('SELECT count(*) FROM plans').fetchone()[0] >= 10000:
                     return respond('503 Service Unavailable', {'error': 'Plan storage is full. Please try again later.'})
                 db.execute('INSERT INTO plans VALUES (?, ?, ?, ?, ?, ?, ?)',
-                           (reference, amount, months, purpose, 0.24, created.isoformat(), expires))
+                           (reference, amount, months, purpose, 0.40, created.isoformat(), expires))
             return respond('201 Created', {'reference': reference, 'expires_at': expires})
         if path.startswith('/api/plans/') and method == 'GET':
             reference = path.removeprefix('/api/plans/')
