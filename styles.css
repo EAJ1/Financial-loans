@@ -117,3 +117,9 @@ dialog{max-height:calc(100dvh - 32px);overflow-y:auto}
 
 /* Vector decoration avoids platform emoji rendering over the heading. */
 .about-flower{width:160px;height:160px;pointer-events:none}
+
+/* Hlongwe monogram, shared by the header and footer. */
+.logo{column-gap:9px}
+.logo .brand-icon{width:36px;height:36px;margin-top:0;align-self:center}
+.footer-top .logo .brand-icon{width:31px;height:31px}
+@media(max-width:700px){.logo .brand-icon{width:31px;height:31px}}
